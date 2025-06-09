@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="root" fillWidth="false" minWidth="0.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MungesaController">
+    <children>
+        <MenuBar style="-fx-background-color: #2e728d;" styleClass="menubar" stylesheets="@style.css">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="menuNew" onAction="#handleNew" text="New" />
+                        <Menu fx:id="menuOpen" text="Open…" />
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="menuLogout" onAction="#handleLogout" text="Logout" />
+                        <MenuItem fx:id="menuQuit" onAction="#handleQuit" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menu-item" text="Edit">
+                    <items>
+                        <MenuItem fx:id="menuUndo" onAction="#handleUndo" text="Undo" />
+                        <MenuItem fx:id="menuRedo" onAction="#handleRedo" text="Redo" />
+                        <MenuItem fx:id="menuCut" onAction="#handleCut" text="Cut" />
+                        <MenuItem fx:id="menuCopy" onAction="#handleCopy" text="Copy" />
+                        <MenuItem fx:id="menuPaste" onAction="#handlePaste" text="Paste" />
+                        <MenuItem fx:id="menuSelectAll" onAction="#handleSelectAll" text="Select All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menu-item" text="Help">
+                    <items>
+                        <MenuItem fx:id="menuHelp" onAction="#handleHelp" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menu-item" text="Settings">
+                    <items>
+                        <MenuItem fx:id="menuSettings" onAction="#handleSettings" text="Settings" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane styleClass="login" stylesheets="@style.css">
+            <children>
+                <AnchorPane layoutY="-1.0" prefHeight="105.0" prefWidth="800.0" style="-fx-background-color: #264653;" styleClass="header" stylesheets="@style.css">
+                    <children>
+                        <MenuButton fx:id="menuLanguage" contentDisplay="TEXT_ONLY" layoutX="641.0" layoutY="32.0" mnemonicParsing="false" popupSide="TOP" prefHeight="41.0" prefWidth="119.0" styleClass="language" text="%txtLang" AnchorPane.rightAnchor="39.66666666666667" AnchorPane.topAnchor="32.0">
+                            <items>
+                                <MenuItem fx:id="menuAL" mnemonicParsing="true" text="ALB" />
+                                <MenuItem fx:id="menuEN" mnemonicParsing="false" text="ENG" />
+                            </items>
+                        </MenuButton>
+                        <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="31.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="21.0">
+                            <image>
+                                <Image url="@../images/ikona.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="103.0" layoutY="28.0" text="EduMetrics" textFill="WHITE" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="28.0">
+                            <font>
+                                <Font name="Colonna MT" size="40.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+
+                <AnchorPane layoutX="418.0" layoutY="155.0" prefHeight="336.0" prefWidth="410.0">
+                    <children>
+                        <Label layoutX="83.0" layoutY="18.0" text="%mungesaId" AnchorPane.rightAnchor="230.0" />
+                        <TextField fx:id="txtId" layoutX="217.0" layoutY="14.0" AnchorPane.rightAnchor="43.66666666666666" />
+                        <Label layoutX="83.0" layoutY="63.0" text="%student" AnchorPane.rightAnchor="230.0" />
+                        <TextField fx:id="txtNxenesi" layoutX="217.0" layoutY="59.0" AnchorPane.rightAnchor="43.333333333333314" />
+                        <Label layoutX="83.0" layoutY="108.0" text="%lenda" AnchorPane.rightAnchor="230.0" />
+                        <TextField fx:id="txtLenda" layoutX="217.0" layoutY="104.0" AnchorPane.rightAnchor="43.333333333333314" />
+                        <Label layoutX="83.0" layoutY="153.0" text="%periudha" AnchorPane.rightAnchor="230.0" />
+                        <TextField fx:id="txtPerioda" layoutX="217.0" layoutY="149.0" AnchorPane.rightAnchor="43.333333333333314" />
+                        <Label layoutX="83.0" layoutY="198.0" text="%dataMungeses" AnchorPane.rightAnchor="228.0" />
+                        <TextField fx:id="dateMungesa" layoutX="217.0" layoutY="194.0" AnchorPane.rightAnchor="43.333333333333314" />
+                        <Label layoutX="83.0" layoutY="243.0" text="%absenceReason" AnchorPane.rightAnchor="231.0" />
+                        <TextField fx:id="txtArsyeja" layoutX="217.0" layoutY="239.0" AnchorPane.rightAnchor="43.66666666666666" />
+                        <Button layoutX="83.0" layoutY="288.0" onAction="#fshijMungese" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: crimson;" text="%_fshij" />
+                        <Button layoutX="159.0" layoutY="288.0" onAction="#perditesoMungese" prefHeight="25.0" prefWidth="63.0" text="%_perditso" />
+                        <Button layoutX="302.0" layoutY="288.0" onAction="#shtoMungese" prefHeight="25.0" prefWidth="63.0" text="%_shto" />
+
+                    </children>
+                </AnchorPane>
+                <fx:include source="globalView.fxml" />
+
+                <TableView fx:id="tabelaMungesat" layoutY="172.0" prefHeight="267.0" >
+                    <columns>
+                        <TableColumn fx:id="colId" style="-fx-background-color: #264653;" styleClass="column-header" text="ID" />
+                        <TableColumn fx:id="colStudentId" style="-fx-background-color: #264653;" styleClass="column-header" text="Student ID" />
+                        <TableColumn fx:id="colLendaId" style="-fx-background-color: #264653;" styleClass="column-header" text="Lënda" />
+                        <TableColumn fx:id="colPeriodaId" style="-fx-background-color: #264653;" styleClass="column-header" text="Perioda" />
+                        <TableColumn fx:id="colData" style="-fx-background-color: #264653;" styleClass="column-header" text="Data" />
+                        <TableColumn fx:id="colArsyeja" style="-fx-background-color: #264653;" styleClass="column-header" text="Arsyeja e mungeses" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <Label fx:id="statusLabel"
+               layoutX="0.0"
+               layoutY="500.0"
+               prefHeight="25.0"
+               prefWidth="800.0"
+               style="-fx-background-color: #e0e0e0; -fx-text-fill: #333333; -fx-font-size: 13px; -fx-padding: 4px;"
+        />
+
+
+    </children>
+    <VBox.margin>
+        <Insets />
+    </VBox.margin>
+
+
+
+</VBox>

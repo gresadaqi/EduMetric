@@ -1,0 +1,198 @@
+CREATE TABLE notat (
+    id SERIAL PRIMARY KEY,
+    nxenesi_id INTEGER NOT NULL,
+    lenda_id INTEGER NOT NULL,
+    mesuesi_id INTEGER NOT NULL,
+    drejtimi_id INTEGER NOT NULL,
+    klasa_id INTEGER NOT NULL,
+    paralelja_id INTEGER NOT NULL,
+    periudha_id INTEGER NOT NULL,
+    nota_pare INTEGER NOT NULL CHECK (nota_pare BETWEEN 1 AND 10),
+    nota_dyte INTEGER NOT NULL CHECK (nota_dyte BETWEEN 1 AND 10),
+    FOREIGN KEY (nxenesi_id) REFERENCES Nxenesit(id) ON DELETE CASCADE,
+    FOREIGN KEY (lenda_id) REFERENCES Lenda(id) ON DELETE CASCADE,
+    FOREIGN KEY (mesuesi_id) REFERENCES Mesuesi(id) ON DELETE CASCADE,
+    FOREIGN KEY (drejtimi_id) REFERENCES Drejtimi(id) ON DELETE CASCADE,
+    FOREIGN KEY (klasa_id) REFERENCES Klasa(id) ON DELETE CASCADE,
+    FOREIGN KEY (paralelja_id) REFERENCES Paralelja(id) ON DELETE CASCADE,
+    FOREIGN KEY (periudha_id) REFERENCES Perioda(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Mungesa (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER NOT NULL,
+    lenda_id INTEGER NOT NULL,
+    perioda_id INTEGER NOT NULL,
+    data_mungeses DATE NOT NULL,
+    arsyeja VARCHAR(255),
+
+    FOREIGN KEY (student_id) REFERENCES Nxenesit(id) ON DELETE CASCADE,
+    FOREIGN KEY (lenda_id) REFERENCES Lenda(id) ON DELETE CASCADE,
+    FOREIGN KEY (perioda_id) REFERENCES Perioda(id) ON DELETE CASCADE
+);
+
+CREATE TABLE RelacioniNotaMesuesi (
+    id SERIAL PRIMARY KEY,
+    nota_id INTEGER NOT NULL,
+    mesues_id INTEGER NOT NULL,
+    data_vendosjes TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    koment VARCHAR(255),
+
+    FOREIGN KEY (nota_id) REFERENCES Notat(id) ON DELETE CASCADE,
+    FOREIGN KEY (mesues_id) REFERENCES Mesuesi(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Mungesa (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER NOT NULL,
+    lenda_id INTEGER NOT NULL,
+    perioda_id INTEGER NOT NULL,
+    data_mungeses DATE NOT NULL,
+    arsyeja VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (student_id) REFERENCES Nxenesit(id) ON DELETE CASCADE,
+    FOREIGN KEY (lenda_id) REFERENCES Lenda(id) ON DELETE CASCADE,
+    FOREIGN KEY (perioda_id) REFERENCES Perioda(id) ON DELETE CASCADE
+);
+
+
+
+DROP TABLE Mesimi
+CREATE TABLE Mesimi (
+    lenda_id INTEGER NOT NULL,
+    profesori_id INTEGER NOT NULL,
+    klasa_id INTEGER NOT NULL,
+    drejtimi_id INTEGER NOT NULL,
+
+    FOREIGN KEY (lenda_id) REFERENCES Lenda(id) ON DELETE CASCADE,
+    FOREIGN KEY (profesori_id) REFERENCES Mesuesi(id) ON DELETE CASCADE,
+    FOREIGN KEY (klasa_id) REFERENCES Klasa(id) ON DELETE CASCADE,
+    FOREIGN KEY (drejtimi_id) REFERENCES Drejtimi(id) ON DELETE CASCADE,
+
+    PRIMARY KEY (lenda_id, profesori_id, klasa_id, drejtimi_id)
+);
+
+CREATE TABLE Drejtor (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    mbiemri VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    tel VARCHAR(15) UNIQUE NOT NULL,
+    roli VARCHAR(50) NOT NULL,
+    adresa_id INTEGER NOT NULL,
+    shkolla_id INTEGER NOT NULL,
+
+    FOREIGN KEY (adresa_id) REFERENCES Adresa(id) ON DELETE CASCADE,
+    FOREIGN KEY (shkolla_id) REFERENCES Shkolla(id) ON DELETE CASCADE
+);
+
+CREATE TABLE notat (
+    id SERIAL PRIMARY KEY,
+    nxenesi_id INTEGER NOT NULL,
+    lenda_id INTEGER NOT NULL,
+    mesuesi_id INTEGER NOT NULL,
+    drejtimi_id INTEGER NOT NULL,
+    klasa_id INTEGER NOT NULL,
+    paralelja_id INTEGER NOT NULL,
+    periudha_id INTEGER NOT NULL,
+    nota_pare INTEGER NOT NULL CHECK (nota_pare BETWEEN 1 AND 10),
+    nota_dyte INTEGER NOT NULL CHECK (nota_dyte BETWEEN 1 AND 10),
+
+    FOREIGN KEY (nxenesi_id) REFERENCES nxenesit(id) ON DELETE CASCADE,
+    FOREIGN KEY (lenda_id) REFERENCES lendet(id) ON DELETE CASCADE,
+    FOREIGN KEY (mesuesi_id) REFERENCES mesuesit(id) ON DELETE CASCADE,
+    FOREIGN KEY (drejtimi_id) REFERENCES drejtimet(id) ON DELETE CASCADE,
+    FOREIGN KEY (klasa_id) REFERENCES klasat(id) ON DELETE CASCADE,
+    FOREIGN KEY (paralelja_id) REFERENCES paraleljet(id) ON DELETE CASCADE,
+    FOREIGN KEY (periudha_id) REFERENCES periudhat(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Lenda (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    drejtimi_id INTEGER NOT NULL,
+    perioda_id INTEGER NOT NULL,
+    mesuesi_id INTEGER NOT NULL,
+
+    FOREIGN KEY (drejtimi_id) REFERENCES Drejtimi(id) ON DELETE CASCADE,
+    FOREIGN KEY (perioda_id) REFERENCES Perioda(id) ON DELETE CASCADE,
+    FOREIGN KEY (mesuesi_id) REFERENCES Mesuesi(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Klasa (
+    id SERIAL PRIMARY KEY,
+    niveli INTEGER NOT NULL,
+    shkolla_id INTEGER NOT NULL,
+    paralelja_id INTEGER NOT NULL,
+    mesuesi_id INTEGER NOT NULL,
+    drejtimi_id INTEGER NOT NULL,
+
+    FOREIGN KEY (shkolla_id) REFERENCES Shkolla(id) ON DELETE CASCADE,
+    FOREIGN KEY (paralelja_id) REFERENCES Paralelja(id) ON DELETE CASCADE,
+    FOREIGN KEY (mesuesi_id) REFERENCES Mesuesi(id) ON DELETE CASCADE,
+    FOREIGN KEY (drejtimi_id) REFERENCES Drejtimi(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Perioda (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    data_fillimit DATE NOT NULL,
+    data_mbarimit DATE NOT NULL
+);
+
+CREATE TABLE Nxenesit (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    mbiemri VARCHAR(100) NOT NULL,
+    datelindja DATE NOT NULL,
+    gjinia CHAR(1) CHECK (gjinia IN ('M', 'F')),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15) UNIQUE NOT NULL,
+    adresa_id INTEGER NOT NULL,
+
+    FOREIGN KEY (adresa_id) REFERENCES Adresa(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Mesuesi (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    mbiemri VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    tel VARCHAR(15) UNIQUE NOT NULL,
+    roli VARCHAR(50) NOT NULL,
+    adresa_id INTEGER NOT NULL,
+
+    FOREIGN KEY (adresa_id) REFERENCES Adresa(id) ON DELETE CASCADE
+);
+
+DROP TABLE Drejtimi
+CREATE TABLE Drejtimi (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL,
+    shkolla_id INTEGER NOT NULL,
+    paralelja_id INTEGER NOT NULL,
+
+    FOREIGN KEY (shkolla_id) REFERENCES Shkolla(id) ON DELETE CASCADE,
+    FOREIGN KEY (paralelja_id) REFERENCES Paralelja(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Shkolla (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(150) NOT NULL,
+    tel VARCHAR(15) UNIQUE NOT NULL,
+    adresa_id INTEGER NOT NULL,
+    FOREIGN KEY (adresa_id) REFERENCES Adresa(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Paralelja (
+    id SERIAL PRIMARY KEY,
+    emri VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Adresa (
+    id SERIAL PRIMARY KEY,
+    qyteti VARCHAR(100) NOT NULL,
+    rruga VARCHAR(150) NOT NULL,
+    kodi_postar VARCHAR(10) NOT NULL
+);
+
