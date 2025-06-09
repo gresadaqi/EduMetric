@@ -89,15 +89,8 @@ Për të ekzekutuar aplikacionin, ju nevojitet:
 3. Sigurohuni që bibliotekat FontAwesome dhe JFoenix të jenë të përfshira në dependencies.
 4. Ndërtoni dhe ekzekutoni aplikacionin nga klasa kryesore.
 
----
 
-## Kontributorët
 
-- Diella Kika
-- Florida Suka
-- Florjete Kuka
-- Leona Zullufi
-- Gresa Daqi
 
 
 
